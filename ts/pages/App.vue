@@ -4,11 +4,7 @@
       <md-button class="md-icon-button" @click="showNavigation = true">
         <md-icon>menu</md-icon>
       </md-button>
-      <span class="md-title">My Title</span>
-
-      <div class="md-toolbar-section-end">
-        <md-button @click="showSidepanel = true">Favorites</md-button>
-      </div>
+      <span class="md-title">{{ this.lol }}</span>
     </md-toolbar>
 
     <md-drawer :md-active.sync="showNavigation" md-swipeable>
@@ -17,12 +13,12 @@
       </md-toolbar>
 
       <md-list>
-        <md-list-item to="/" exact>
+        <md-list-item to="/" @click="routeChange()" exact>
           <md-icon>home</md-icon>
           <span class="md-list-item-text">Home</span>
         </md-list-item>
 
-        <md-list-item to="/about">
+        <md-list-item to="/about" @click="routeChange()">
           <md-icon>send</md-icon>
           <span class="md-list-item-text">About</span>
         </md-list-item>
@@ -36,13 +32,24 @@
 </template>
 
 <script>
+
 export default {
-  name: 'Temporary',
-  data: () => ({
-    showNavigation: false,
-    showSidepanel: false,
-  }),
+  data() {
+    return {
+      showNavigation: false,
+      lol: 1,
+    };
+  },
+  methods: {
+    routeChange() {
+      routeChangeEvent(this);
+    },
+  },
 };
+
+function routeChangeEvent(data) {
+  data.showNavigation = false;
+}
 </script>
 
 <style lang="scss" scoped>

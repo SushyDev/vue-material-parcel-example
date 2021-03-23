@@ -1,11 +1,13 @@
 <template>
   <div class="page-container md-layout-column">
     <md-toolbar class="md-primary">
-      <md-button class="md-icon-button" @click="showNavigation = true">
+      <md-button v-show="showMenu" class="md-icon-button" @click="showNavigation = true">
         <md-icon>menu</md-icon>
       </md-button>
-      <span class="md-title">{{ this.lol }}</span>
+      <span class="md-title">Login</span>
     </md-toolbar>
+
+    <md-progress-bar v-show="showProgress" class="md-accent" md-mode="query"></md-progress-bar>
 
     <md-drawer :md-active.sync="showNavigation" md-swipeable>
       <md-toolbar class="md-transparent" md-elevation="0">
@@ -13,43 +15,42 @@
       </md-toolbar>
 
       <md-list>
-        <md-list-item to="/" @click="routeChange()" exact>
-          <md-icon>home</md-icon>
+        <md-list-item to="/about" @click="routeChange()" exact>
+          <md-icon>send</md-icon>
           <span class="md-list-item-text">Home</span>
         </md-list-item>
 
-        <md-list-item to="/about" @click="routeChange()">
+        <md-list-item to="/home" @click="routeChange()">
           <md-icon>send</md-icon>
-          <span class="md-list-item-text">About</span>
+          <span class="md-list-item-text">Other page</span>
         </md-list-item>
       </md-list>
     </md-drawer>
 
     <md-content>
-      <router-view />
+      <router-view @showProgress="showProgress = !showProgress" @showMenu="showMenu = !showMenu" />
     </md-content>
   </div>
 </template>
 
 <script>
+import Home from './Home';
 
 export default {
-  data() {
-    return {
-      showNavigation: false,
-      lol: 1,
-    };
+  components: {
+    Home,
   },
+  data: () => ({
+    showMenu: false,
+    showProgress: false,
+    showNavigation: false,
+  }),
   methods: {
     routeChange() {
-      routeChangeEvent(this);
+      this.showNavigation = false;
     },
   },
 };
-
-function routeChangeEvent(data) {
-  data.showNavigation = false;
-}
 </script>
 
 <style lang="scss" scoped>

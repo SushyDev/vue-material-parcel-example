@@ -8,7 +8,11 @@
 
 <script>
 import data from './App.vue';
+
 export default {
+  created() {
+    this.$emit('showMenu');
+  },
   data() {
     return {
       lol: data.data().lol,

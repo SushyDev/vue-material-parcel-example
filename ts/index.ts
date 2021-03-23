@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import App from './pages/App';
-import router from './router/index';
+import router from './router';
 
 import '../scss/styles';
 
